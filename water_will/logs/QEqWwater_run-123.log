@@ -1,0 +1,761 @@
+2024-07-16 15:55:30.037 INFO: MACE version: 0.3.5
+2024-07-16 15:55:30.038 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cuda', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -13.575035506869515, 6: -1029.6173622986487, 7: -1485.1410643783852, 8: -2042.617308911902, 16: -10832.265333248919}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='charge', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=20, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=True, wandb_project='water', wandb_entity='lukas-petersen', wandb_name='mace_00', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-16 15:55:30.075 INFO: CUDA version: 12.1, CUDA device: 0
+2024-07-16 15:55:30.136 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-16 15:55:30.137 INFO: Using random 5.0% of training set for validation
+2024-07-16 15:55:30.137 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-16 15:55:30.137 INFO: AtomicNumberTable: (1, 8)
+2024-07-16 15:55:30.137 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-16 15:55:30.137 INFO: Atomic energies: [-13.575035506869515, -2042.617308911902]
+2024-07-16 15:55:30.216 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-16 15:55:30.240 INFO: Average number of neighbors: 20.672
+2024-07-16 15:55:30.240 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-16 15:55:30.240 INFO: Building model
+2024-07-16 15:55:30.241 INFO: charged models: taking formal charges per config from data
+2024-07-16 15:55:30.241 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-16 15:55:30.264 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+2024-07-16 15:55:31.956 WARNING: Cannot find checkpoint with tag 'QEqWwater_run-123' in 'checkpoints'
+2024-07-16 15:55:31.956 INFO: maceQEq(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(2x0e -> 64x0e | 128 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=8.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=8.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[-13.5750, -2042.6173])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e -> 64x0e | 4096 weights)
+      (conv_tp): TensorProduct(64x0e x 1x0e+1x1o+1x2e+1x3o -> 64x0e+64x1o+64x2e+64x3o | 256 paths | 256 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 256]
+      (linear): Linear(64x0e+64x1o+64x2e+64x3o -> 64x0e+64x1o+64x2e+64x3o | 16384 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e x 2x0e -> 64x0e+64x1o | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+      (conv_tp): TensorProduct(64x0e+64x1o x 1x0e+1x1o+1x2e+1x3o -> 128x0e+192x1o+192x2e+128x3o | 640 paths | 640 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 640]
+      (linear): Linear(128x0e+192x1o+192x2e+128x3o -> 64x0e+64x1o+64x2e+64x3o | 40960 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e+64x1o x 2x0e -> 64x0e | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x6x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e -> 64x0e | 4096 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.000000, shift=707.543639)
+  (readouts_eneg): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (eneg): LinearReadoutBlock(
+    (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+  )
+  (charge_equil): ChargeEquilibrationBlock(
+    (hardness_matrix): HardnessMatrix(
+      (hardness_matrix): A_real()
+    )
+    (hardness_matrix_PBC): HardnessMatrix_PBC(
+      (self_interaction): GTOSelfInteractionBlock()
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block_A): GTOChargeDensityFourierSeriesBlock_A()
+      (fourier_energy_block_A): KspaceEnergyProductBlock_A()
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+    )
+  )
+  (coulomb_energy): PBCAgnosticDirectElectrostaticEnergyBlock(
+    (realspace_energy): RealSpaceChargesOnlyElectrostaticEnergyBlock(
+      (self_interaction): GaussianSelfEnergyBlock()
+    )
+    (ewald_energy): KSpaceDirectElectrostaticEnergyBlock(
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+      (fourier_energy_block): KspaceEnergyProductBlock()
+      (self_interaction): GTOSelfInteractionBlock()
+      (monopole_dipole_correction): MonopoleDipoleCorrectionBlock()
+    )
+  )
+)
+2024-07-16 15:55:31.960 INFO: Number of parameters: 190050
+2024-07-16 15:55:31.960 INFO: Optimizer: Adam (
+Parameter Group 0
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: embedding
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_decay
+    weight_decay: 5e-07
+
+Parameter Group 2
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_no_decay
+    weight_decay: 0.0
+
+Parameter Group 3
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: products
+    weight_decay: 5e-07
+
+Parameter Group 4
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: readouts
+    weight_decay: 0.0
+)
+2024-07-16 15:55:31.960 INFO: Using Weights and Biases for logging
+2024-07-16 15:55:45.367 INFO: Using gradient clipping with tolerance=10.000
+2024-07-16 15:55:45.368 INFO: Started training
+2024-07-16 15:56:05.762 INFO: Epoch 0: loss=303.1708263, RMSE_q = 1.7411801, MAE_E_per_atom=14732.0 meV, MAE_F=559.7 meV / A
+2024-07-16 15:56:15.700 INFO: Epoch 2: loss=142.1168528, RMSE_q = 1.1921277, MAE_E_per_atom=14732.7 meV, MAE_F=279.3 meV / A
+2024-07-16 15:56:24.303 INFO: Epoch 4: loss=2.4261502, RMSE_q = 0.1557610, MAE_E_per_atom=14725.4 meV, MAE_F=12.5 meV / A
+2024-07-16 15:56:32.863 INFO: Epoch 6: loss=141.8936631, RMSE_q = 1.1911913, MAE_E_per_atom=14742.3 meV, MAE_F=283.2 meV / A
+2024-07-16 15:56:41.373 INFO: Epoch 8: loss=4.8064362, RMSE_q = 0.2192359, MAE_E_per_atom=14730.0 meV, MAE_F=15.9 meV / A
+2024-07-16 15:56:49.838 INFO: Epoch 10: loss=2.4762659, RMSE_q = 0.1573616, MAE_E_per_atom=14729.8 meV, MAE_F=12.8 meV / A
+2024-07-16 15:56:58.617 INFO: Epoch 12: loss=3.7344161, RMSE_q = 0.1932464, MAE_E_per_atom=14731.8 meV, MAE_F=17.8 meV / A
+2024-07-16 15:57:07.344 INFO: Epoch 14: loss=3.5072922, RMSE_q = 0.1872777, MAE_E_per_atom=14730.7 meV, MAE_F=12.8 meV / A
+2024-07-16 15:57:16.176 INFO: Epoch 16: loss=3.0613217, RMSE_q = 0.1749663, MAE_E_per_atom=14731.1 meV, MAE_F=11.7 meV / A
+2024-07-16 15:57:24.876 INFO: Epoch 18: loss=6.5081183, RMSE_q = 0.2551101, MAE_E_per_atom=14731.3 meV, MAE_F=15.0 meV / A
+2024-07-16 15:57:33.502 INFO: Epoch 20: loss=3.7963134, RMSE_q = 0.1948413, MAE_E_per_atom=14731.2 meV, MAE_F=12.0 meV / A
+2024-07-16 15:57:42.354 INFO: Epoch 22: loss=2.8517424, RMSE_q = 0.1688710, MAE_E_per_atom=14731.9 meV, MAE_F=13.2 meV / A
+2024-07-16 15:57:51.040 INFO: Epoch 24: loss=3.1778686, RMSE_q = 0.1782658, MAE_E_per_atom=14733.0 meV, MAE_F=20.3 meV / A
+2024-07-16 15:57:59.848 INFO: Epoch 26: loss=3.5091475, RMSE_q = 0.1873272, MAE_E_per_atom=14732.2 meV, MAE_F=18.3 meV / A
+2024-07-16 15:58:08.664 INFO: Epoch 28: loss=3.9940911, RMSE_q = 0.1998522, MAE_E_per_atom=14733.3 meV, MAE_F=15.0 meV / A
+2024-07-16 15:58:17.390 INFO: Epoch 30: loss=3.3308907, RMSE_q = 0.1825073, MAE_E_per_atom=14733.2 meV, MAE_F=17.4 meV / A
+2024-07-16 15:58:26.081 INFO: Epoch 32: loss=4.2664829, RMSE_q = 0.2065547, MAE_E_per_atom=14733.9 meV, MAE_F=17.1 meV / A
+2024-07-16 15:58:34.825 INFO: Epoch 34: loss=3.9353621, RMSE_q = 0.1983775, MAE_E_per_atom=14733.7 meV, MAE_F=15.3 meV / A
+2024-07-16 15:58:43.603 INFO: Epoch 36: loss=3.1001994, RMSE_q = 0.1760738, MAE_E_per_atom=14734.1 meV, MAE_F=18.4 meV / A
+2024-07-16 15:58:52.454 INFO: Epoch 38: loss=3.8477127, RMSE_q = 0.1961559, MAE_E_per_atom=14735.2 meV, MAE_F=21.2 meV / A
+2024-07-16 15:59:01.212 INFO: Epoch 40: loss=3.8517856, RMSE_q = 0.1962597, MAE_E_per_atom=14736.6 meV, MAE_F=22.2 meV / A
+2024-07-16 15:59:10.027 INFO: Epoch 42: loss=3.6707564, RMSE_q = 0.1915922, MAE_E_per_atom=14736.4 meV, MAE_F=13.7 meV / A
+2024-07-16 15:59:18.730 INFO: Epoch 44: loss=3.3392953, RMSE_q = 0.1827374, MAE_E_per_atom=14736.5 meV, MAE_F=22.9 meV / A
+2024-07-16 15:59:27.495 INFO: Epoch 46: loss=3.9519467, RMSE_q = 0.1987950, MAE_E_per_atom=14739.2 meV, MAE_F=18.3 meV / A
+2024-07-16 15:59:36.209 INFO: Epoch 48: loss=5.6636876, RMSE_q = 0.2379850, MAE_E_per_atom=14740.1 meV, MAE_F=17.4 meV / A
+2024-07-16 15:59:40.636 INFO: Training complete
+2024-07-16 15:59:40.640 INFO: Computing metrics for training, validation, and test sets
+2024-07-16 15:59:40.642 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-4.pt
+2024-07-16 15:59:40.688 INFO: Loaded model from epoch 4
+2024-07-16 15:59:40.759 INFO: Evaluating train ...
+2024-07-16 15:59:43.446 INFO: Evaluating valid ...
+2024-07-16 15:59:43.675 INFO: 
++-------------+---------------------+------------------+-------------------+--------+
+| config_type | RMSE E / meV / atom | RMSE F / meV / A | relative F RMSE % | RMSE q |
++-------------+---------------------+------------------+-------------------+--------+
++-------------+---------------------+------------------+-------------------+--------+
+2024-07-16 15:59:43.675 INFO: Saving model to checkpoints/QEqWwater_run-123.model
+2024-07-16 15:59:43.784 INFO: Done
+2024-07-16 16:12:54.932 INFO: MACE version: 0.3.5
+2024-07-16 16:12:54.932 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cuda', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -13.575035506869515, 6: -1029.6173622986487, 7: -1485.1410643783852, 8: -2042.617308911902, 16: -10832.265333248919}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='charge', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=20, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=True, wandb_project='water', wandb_entity='ml4elstner-org', wandb_name='mace_00', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-16 16:12:54.969 INFO: CUDA version: 12.1, CUDA device: 0
+2024-07-16 16:12:55.031 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-16 16:12:55.031 INFO: Using random 5.0% of training set for validation
+2024-07-16 16:12:55.031 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-16 16:12:55.032 INFO: AtomicNumberTable: (1, 8)
+2024-07-16 16:12:55.032 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-16 16:12:55.032 INFO: Atomic energies: [-13.575035506869515, -2042.617308911902]
+2024-07-16 16:12:55.111 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-16 16:12:55.136 INFO: Average number of neighbors: 20.672
+2024-07-16 16:12:55.136 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-16 16:12:55.136 INFO: Building model
+2024-07-16 16:12:55.136 INFO: charged models: taking formal charges per config from data
+2024-07-16 16:12:55.136 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-16 16:12:55.159 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+2024-07-16 16:12:56.869 WARNING: No SWA checkpoint found, while SWA is enabled. Compare the swa_start parameter and the latest checkpoint.
+2024-07-16 16:12:56.870 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-4.pt
+2024-07-16 16:12:56.912 INFO: maceQEq(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(2x0e -> 64x0e | 128 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=8.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=8.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[-13.5750, -2042.6173])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e -> 64x0e | 4096 weights)
+      (conv_tp): TensorProduct(64x0e x 1x0e+1x1o+1x2e+1x3o -> 64x0e+64x1o+64x2e+64x3o | 256 paths | 256 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 256]
+      (linear): Linear(64x0e+64x1o+64x2e+64x3o -> 64x0e+64x1o+64x2e+64x3o | 16384 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e x 2x0e -> 64x0e+64x1o | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+      (conv_tp): TensorProduct(64x0e+64x1o x 1x0e+1x1o+1x2e+1x3o -> 128x0e+192x1o+192x2e+128x3o | 640 paths | 640 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 640]
+      (linear): Linear(128x0e+192x1o+192x2e+128x3o -> 64x0e+64x1o+64x2e+64x3o | 40960 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e+64x1o x 2x0e -> 64x0e | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x6x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e -> 64x0e | 4096 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.000000, shift=707.543639)
+  (readouts_eneg): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (eneg): LinearReadoutBlock(
+    (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+  )
+  (charge_equil): ChargeEquilibrationBlock(
+    (hardness_matrix): HardnessMatrix(
+      (hardness_matrix): A_real()
+    )
+    (hardness_matrix_PBC): HardnessMatrix_PBC(
+      (self_interaction): GTOSelfInteractionBlock()
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block_A): GTOChargeDensityFourierSeriesBlock_A()
+      (fourier_energy_block_A): KspaceEnergyProductBlock_A()
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+    )
+  )
+  (coulomb_energy): PBCAgnosticDirectElectrostaticEnergyBlock(
+    (realspace_energy): RealSpaceChargesOnlyElectrostaticEnergyBlock(
+      (self_interaction): GaussianSelfEnergyBlock()
+    )
+    (ewald_energy): KSpaceDirectElectrostaticEnergyBlock(
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+      (fourier_energy_block): KspaceEnergyProductBlock()
+      (self_interaction): GTOSelfInteractionBlock()
+      (monopole_dipole_correction): MonopoleDipoleCorrectionBlock()
+    )
+  )
+)
+2024-07-16 16:12:56.916 INFO: Number of parameters: 190050
+2024-07-16 16:12:56.916 INFO: Optimizer: Adam (
+Parameter Group 0
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: embedding
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_decay
+    weight_decay: 5e-07
+
+Parameter Group 2
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_no_decay
+    weight_decay: 0.0
+
+Parameter Group 3
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: products
+    weight_decay: 5e-07
+
+Parameter Group 4
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: readouts
+    weight_decay: 0.0
+)
+2024-07-16 16:12:56.916 INFO: Using Weights and Biases for logging
+2024-07-16 16:16:29.829 INFO: MACE version: 0.3.5
+2024-07-16 16:16:29.829 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cuda', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -13.575035506869515, 6: -1029.6173622986487, 7: -1485.1410643783852, 8: -2042.617308911902, 16: -10832.265333248919}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='charge', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=20, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=True, wandb_project='water', wandb_entity='ml4elstner', wandb_name='mace_00', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-16 16:16:29.867 INFO: CUDA version: 12.1, CUDA device: 0
+2024-07-16 16:16:29.930 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-16 16:16:29.930 INFO: Using random 5.0% of training set for validation
+2024-07-16 16:16:29.930 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-16 16:16:29.930 INFO: AtomicNumberTable: (1, 8)
+2024-07-16 16:16:29.930 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-16 16:16:29.931 INFO: Atomic energies: [-13.575035506869515, -2042.617308911902]
+2024-07-16 16:16:30.010 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-16 16:16:30.035 INFO: Average number of neighbors: 20.672
+2024-07-16 16:16:30.035 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-16 16:16:30.035 INFO: Building model
+2024-07-16 16:16:30.035 INFO: charged models: taking formal charges per config from data
+2024-07-16 16:16:30.035 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-16 16:16:30.059 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+2024-07-16 16:16:31.788 WARNING: No SWA checkpoint found, while SWA is enabled. Compare the swa_start parameter and the latest checkpoint.
+2024-07-16 16:16:31.788 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-4.pt
+2024-07-16 16:16:31.830 INFO: maceQEq(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(2x0e -> 64x0e | 128 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=8.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=8.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[-13.5750, -2042.6173])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e -> 64x0e | 4096 weights)
+      (conv_tp): TensorProduct(64x0e x 1x0e+1x1o+1x2e+1x3o -> 64x0e+64x1o+64x2e+64x3o | 256 paths | 256 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 256]
+      (linear): Linear(64x0e+64x1o+64x2e+64x3o -> 64x0e+64x1o+64x2e+64x3o | 16384 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e x 2x0e -> 64x0e+64x1o | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+      (conv_tp): TensorProduct(64x0e+64x1o x 1x0e+1x1o+1x2e+1x3o -> 128x0e+192x1o+192x2e+128x3o | 640 paths | 640 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 640]
+      (linear): Linear(128x0e+192x1o+192x2e+128x3o -> 64x0e+64x1o+64x2e+64x3o | 40960 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e+64x1o x 2x0e -> 64x0e | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x6x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64 (cuda:0)]
+                (1): Parameter containing: [torch.float64 of size 2x1x64 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e -> 64x0e | 4096 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.000000, shift=707.543639)
+  (readouts_eneg): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (eneg): LinearReadoutBlock(
+    (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+  )
+  (charge_equil): ChargeEquilibrationBlock(
+    (hardness_matrix): HardnessMatrix(
+      (hardness_matrix): A_real()
+    )
+    (hardness_matrix_PBC): HardnessMatrix_PBC(
+      (self_interaction): GTOSelfInteractionBlock()
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block_A): GTOChargeDensityFourierSeriesBlock_A()
+      (fourier_energy_block_A): KspaceEnergyProductBlock_A()
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+    )
+  )
+  (coulomb_energy): PBCAgnosticDirectElectrostaticEnergyBlock(
+    (realspace_energy): RealSpaceChargesOnlyElectrostaticEnergyBlock(
+      (self_interaction): GaussianSelfEnergyBlock()
+    )
+    (ewald_energy): KSpaceDirectElectrostaticEnergyBlock(
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+      (fourier_energy_block): KspaceEnergyProductBlock()
+      (self_interaction): GTOSelfInteractionBlock()
+      (monopole_dipole_correction): MonopoleDipoleCorrectionBlock()
+    )
+  )
+)
+2024-07-16 16:16:31.833 INFO: Number of parameters: 190050
+2024-07-16 16:16:31.833 INFO: Optimizer: Adam (
+Parameter Group 0
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: embedding
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_decay
+    weight_decay: 5e-07
+
+Parameter Group 2
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_no_decay
+    weight_decay: 0.0
+
+Parameter Group 3
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: products
+    weight_decay: 5e-07
+
+Parameter Group 4
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: readouts
+    weight_decay: 0.0
+)
+2024-07-16 16:16:31.834 INFO: Using Weights and Biases for logging
+2024-07-16 16:16:36.773 INFO: Using gradient clipping with tolerance=10.000
+2024-07-16 16:16:36.773 INFO: Started training
+2024-07-16 16:16:56.982 INFO: Epoch 4: loss=4.2055732, RMSE_q = 0.2050749, MAE_E_per_atom=14727.4 meV, MAE_F=15.1 meV / A
+2024-07-16 16:17:07.090 INFO: Epoch 6: loss=7.5737659, RMSE_q = 0.2752048, MAE_E_per_atom=14728.2 meV, MAE_F=18.8 meV / A
+2024-07-16 16:17:15.566 INFO: Epoch 8: loss=2.9025209, RMSE_q = 0.1703679, MAE_E_per_atom=14728.4 meV, MAE_F=13.4 meV / A
+2024-07-16 16:17:24.060 INFO: Epoch 10: loss=4.6301529, RMSE_q = 0.2151779, MAE_E_per_atom=14728.9 meV, MAE_F=15.4 meV / A
+2024-07-16 16:17:32.436 INFO: Epoch 12: loss=2.7356617, RMSE_q = 0.1653984, MAE_E_per_atom=14728.8 meV, MAE_F=15.5 meV / A
+2024-07-16 16:17:41.108 INFO: Epoch 14: loss=3.3381380, RMSE_q = 0.1827057, MAE_E_per_atom=14730.2 meV, MAE_F=16.1 meV / A
+2024-07-16 16:17:49.923 INFO: Epoch 16: loss=2.3666160, RMSE_q = 0.1538381, MAE_E_per_atom=14727.2 meV, MAE_F=10.8 meV / A
+2024-07-16 16:17:58.641 INFO: Epoch 18: loss=4.7743248, RMSE_q = 0.2185023, MAE_E_per_atom=14728.0 meV, MAE_F=18.7 meV / A
+2024-07-16 16:18:07.579 INFO: Epoch 20: loss=3.5070988, RMSE_q = 0.1872725, MAE_E_per_atom=14728.5 meV, MAE_F=21.6 meV / A
+2024-07-16 16:18:16.304 INFO: Epoch 22: loss=7.3744398, RMSE_q = 0.2715592, MAE_E_per_atom=14729.1 meV, MAE_F=30.5 meV / A
+2024-07-16 16:18:24.976 INFO: Epoch 24: loss=2.6325876, RMSE_q = 0.1622525, MAE_E_per_atom=14729.3 meV, MAE_F=22.0 meV / A
+2024-07-16 16:18:33.768 INFO: Epoch 26: loss=8.1992325, RMSE_q = 0.2863430, MAE_E_per_atom=14730.7 meV, MAE_F=23.6 meV / A
+2024-07-16 16:18:42.622 INFO: Epoch 28: loss=4.1263083, RMSE_q = 0.2031332, MAE_E_per_atom=14729.9 meV, MAE_F=46.1 meV / A
+2024-07-16 16:18:51.275 INFO: Epoch 30: loss=2.1902536, RMSE_q = 0.1479951, MAE_E_per_atom=14729.9 meV, MAE_F=23.8 meV / A
+2024-07-16 16:19:00.157 INFO: Epoch 32: loss=4.3279000, RMSE_q = 0.2080361, MAE_E_per_atom=14730.1 meV, MAE_F=48.2 meV / A
+2024-07-16 16:19:09.040 INFO: Epoch 34: loss=3.7891780, RMSE_q = 0.1946581, MAE_E_per_atom=14731.1 meV, MAE_F=19.6 meV / A
+2024-07-16 16:19:17.825 INFO: Epoch 36: loss=7.2680848, RMSE_q = 0.2695939, MAE_E_per_atom=14732.3 meV, MAE_F=43.1 meV / A
+2024-07-16 16:19:26.591 INFO: Epoch 38: loss=2.8292243, RMSE_q = 0.1682030, MAE_E_per_atom=14732.0 meV, MAE_F=26.1 meV / A
+2024-07-16 16:19:35.332 INFO: Epoch 40: loss=58.8905539, RMSE_q = 0.7674018, MAE_E_per_atom=14738.0 meV, MAE_F=108.1 meV / A
+2024-07-16 16:19:44.184 INFO: Epoch 42: loss=6.3941128, RMSE_q = 0.2528658, MAE_E_per_atom=14733.0 meV, MAE_F=43.7 meV / A
+2024-07-16 16:19:52.863 INFO: Epoch 44: loss=15.7617141, RMSE_q = 0.3970103, MAE_E_per_atom=14734.0 meV, MAE_F=52.4 meV / A
+2024-07-16 16:20:01.619 INFO: Epoch 46: loss=15.6492167, RMSE_q = 0.3955909, MAE_E_per_atom=14734.1 meV, MAE_F=49.2 meV / A
+2024-07-16 16:20:10.474 INFO: Epoch 48: loss=13.8322187, RMSE_q = 0.3719169, MAE_E_per_atom=14735.5 meV, MAE_F=47.0 meV / A
+2024-07-16 16:20:14.873 INFO: Training complete
+2024-07-16 16:20:14.875 INFO: Computing metrics for training, validation, and test sets
+2024-07-16 16:20:14.877 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-30.pt
+2024-07-16 16:20:14.923 INFO: Loaded model from epoch 30
+2024-07-16 16:20:14.993 INFO: Evaluating train ...
+2024-07-16 16:20:17.678 INFO: Evaluating valid ...
+2024-07-16 16:20:17.907 INFO: 
++-------------+---------------------+------------------+-------------------+--------+
+| config_type | RMSE E / meV / atom | RMSE F / meV / A | relative F RMSE % | RMSE q |
++-------------+---------------------+------------------+-------------------+--------+
++-------------+---------------------+------------------+-------------------+--------+
+2024-07-16 16:20:17.907 INFO: Saving model to checkpoints/QEqWwater_run-123.model
+2024-07-16 16:20:18.084 INFO: Done

@@ -1,0 +1,774 @@
+2024-07-15 14:36:07.740 INFO: MACE version: 0.3.5
+2024-07-15 14:36:07.740 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water2000.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=100, valid_batch_size=100, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-15 14:36:07.740 INFO: Using CPU
+2024-07-15 14:36:20.041 INFO: MACE version: 0.3.5
+2024-07-15 14:36:20.041 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=100, valid_batch_size=100, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-15 14:36:20.041 INFO: Using CPU
+2024-07-15 14:36:54.577 INFO: MACE version: 0.3.5
+2024-07-15 14:36:54.577 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=100, valid_batch_size=100, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-15 14:36:54.577 INFO: Using CPU
+2024-07-15 14:36:54.610 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-15 14:36:54.610 INFO: Using random 5.0% of training set for validation
+2024-07-15 14:36:54.610 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-15 14:36:54.619 INFO: AtomicNumberTable: (1, 8)
+2024-07-15 14:36:54.619 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-15 14:36:54.619 INFO: Atomic energies: [-12.6746244439181, -2041.03979050724]
+2024-07-15 14:36:54.652 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-15 14:37:54.465 INFO: MACE version: 0.3.5
+2024-07-15 14:37:54.465 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=10, valid_batch_size=5, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-15 14:37:54.465 INFO: Using CPU
+2024-07-15 14:37:54.498 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-15 14:37:54.499 INFO: Using random 5.0% of training set for validation
+2024-07-15 14:37:54.499 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-15 14:37:54.499 INFO: AtomicNumberTable: (1, 8)
+2024-07-15 14:37:54.499 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-15 14:37:54.499 INFO: Atomic energies: [-12.6746244439181, -2041.03979050724]
+2024-07-15 14:37:54.529 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-15 14:37:54.546 INFO: Average number of neighbors: 20.672
+2024-07-15 14:37:54.546 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-15 14:37:54.546 INFO: Building model
+2024-07-15 14:37:54.546 INFO: charged models: taking formal charges per config from data
+2024-07-15 14:37:54.546 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-15 14:37:54.561 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+dipole/charge corrections =  True
+2024-07-15 14:37:55.555 WARNING: Cannot find checkpoint with tag 'QEqWwater_run-123' in 'checkpoints'
+2024-07-15 14:37:55.555 INFO: maceQEq(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(2x0e -> 64x0e | 128 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=8.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=8.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[-12.6746, -2041.0398])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e -> 64x0e | 4096 weights)
+      (conv_tp): TensorProduct(64x0e x 1x0e+1x1o+1x2e+1x3o -> 64x0e+64x1o+64x2e+64x3o | 256 paths | 256 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 256]
+      (linear): Linear(64x0e+64x1o+64x2e+64x3o -> 64x0e+64x1o+64x2e+64x3o | 16384 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e x 2x0e -> 64x0e+64x1o | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+      (conv_tp): TensorProduct(64x0e+64x1o x 1x0e+1x1o+1x2e+1x3o -> 128x0e+192x1o+192x2e+128x3o | 640 paths | 640 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 640]
+      (linear): Linear(128x0e+192x1o+192x2e+128x3o -> 64x0e+64x1o+64x2e+64x3o | 40960 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e+64x1o x 2x0e -> 64x0e | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x6x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e -> 64x0e | 4096 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.000000, shift=706.411645)
+  (readouts_eneg): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (eneg): LinearReadoutBlock(
+    (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+  )
+  (charge_equil): ChargeEquilibrationBlock(
+    (hardness_matrix): HardnessMatrix(
+      (hardness_matrix): A_real()
+    )
+    (hardness_matrix_PBC): HardnessMatrix_PBC(
+      (self_interaction): GTOSelfInteractionBlock()
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block_A): GTOChargeDensityFourierSeriesBlock_A()
+      (fourier_energy_block_A): KspaceEnergyProductBlock_A()
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+    )
+  )
+  (coulomb_energy): PBCAgnosticDirectElectrostaticEnergyBlock(
+    (realspace_energy): RealSpaceChargesOnlyElectrostaticEnergyBlock(
+      (self_interaction): GaussianSelfEnergyBlock()
+    )
+    (ewald_energy): KSpaceDirectElectrostaticEnergyBlock(
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+      (fourier_energy_block): KspaceEnergyProductBlock()
+      (self_interaction): GTOSelfInteractionBlock()
+      (monopole_dipole_correction): MonopoleDipoleCorrectionBlock()
+    )
+  )
+)
+2024-07-15 14:37:55.557 INFO: Number of parameters: 190050
+2024-07-15 14:37:55.557 INFO: Optimizer: Adam (
+Parameter Group 0
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: embedding
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_decay
+    weight_decay: 5e-07
+
+Parameter Group 2
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_no_decay
+    weight_decay: 0.0
+
+Parameter Group 3
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: products
+    weight_decay: 5e-07
+
+Parameter Group 4
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: readouts
+    weight_decay: 0.0
+)
+2024-07-15 14:37:55.557 INFO: Using gradient clipping with tolerance=10.000
+2024-07-15 14:37:55.557 INFO: Started training
+2024-07-15 14:43:59.786 INFO: MACE version: 0.3.5
+2024-07-15 14:43:59.786 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=5, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-15 14:43:59.787 INFO: Using CPU
+2024-07-15 14:43:59.820 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-15 14:43:59.820 INFO: Using random 5.0% of training set for validation
+2024-07-15 14:43:59.820 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-15 14:43:59.820 INFO: AtomicNumberTable: (1, 8)
+2024-07-15 14:43:59.820 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-15 14:43:59.820 INFO: Atomic energies: [-12.6746244439181, -2041.03979050724]
+2024-07-15 14:43:59.850 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-15 14:43:59.866 INFO: Average number of neighbors: 20.672
+2024-07-15 14:43:59.867 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-15 14:43:59.867 INFO: Building model
+2024-07-15 14:43:59.867 INFO: charged models: taking formal charges per config from data
+2024-07-15 14:43:59.867 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-15 14:43:59.882 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+dipole/charge corrections =  True
+2024-07-15 14:44:00.822 WARNING: Cannot find checkpoint with tag 'QEqWwater_run-123' in 'checkpoints'
+2024-07-15 14:44:00.822 INFO: maceQEq(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(2x0e -> 64x0e | 128 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=8.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=8.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[-12.6746, -2041.0398])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e -> 64x0e | 4096 weights)
+      (conv_tp): TensorProduct(64x0e x 1x0e+1x1o+1x2e+1x3o -> 64x0e+64x1o+64x2e+64x3o | 256 paths | 256 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 256]
+      (linear): Linear(64x0e+64x1o+64x2e+64x3o -> 64x0e+64x1o+64x2e+64x3o | 16384 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e x 2x0e -> 64x0e+64x1o | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+      (conv_tp): TensorProduct(64x0e+64x1o x 1x0e+1x1o+1x2e+1x3o -> 128x0e+192x1o+192x2e+128x3o | 640 paths | 640 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 640]
+      (linear): Linear(128x0e+192x1o+192x2e+128x3o -> 64x0e+64x1o+64x2e+64x3o | 40960 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e+64x1o x 2x0e -> 64x0e | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x6x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e -> 64x0e | 4096 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.000000, shift=706.411645)
+  (readouts_eneg): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (eneg): LinearReadoutBlock(
+    (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+  )
+  (charge_equil): ChargeEquilibrationBlock(
+    (hardness_matrix): HardnessMatrix(
+      (hardness_matrix): A_real()
+    )
+    (hardness_matrix_PBC): HardnessMatrix_PBC(
+      (self_interaction): GTOSelfInteractionBlock()
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block_A): GTOChargeDensityFourierSeriesBlock_A()
+      (fourier_energy_block_A): KspaceEnergyProductBlock_A()
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+    )
+  )
+  (coulomb_energy): PBCAgnosticDirectElectrostaticEnergyBlock(
+    (realspace_energy): RealSpaceChargesOnlyElectrostaticEnergyBlock(
+      (self_interaction): GaussianSelfEnergyBlock()
+    )
+    (ewald_energy): KSpaceDirectElectrostaticEnergyBlock(
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+      (fourier_energy_block): KspaceEnergyProductBlock()
+      (self_interaction): GTOSelfInteractionBlock()
+      (monopole_dipole_correction): MonopoleDipoleCorrectionBlock()
+    )
+  )
+)
+2024-07-15 14:44:00.823 INFO: Number of parameters: 190050
+2024-07-15 14:44:00.823 INFO: Optimizer: Adam (
+Parameter Group 0
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: embedding
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_decay
+    weight_decay: 5e-07
+
+Parameter Group 2
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_no_decay
+    weight_decay: 0.0
+
+Parameter Group 3
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: products
+    weight_decay: 5e-07
+
+Parameter Group 4
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: readouts
+    weight_decay: 0.0
+)
+2024-07-15 14:44:00.824 INFO: Using gradient clipping with tolerance=10.000
+2024-07-15 14:44:00.824 INFO: Started training
+2024-07-15 14:44:14.767 INFO: Epoch 0: loss=248.1848026, RMSE_q = 1.5753882, MAE_E_per_atom=14726.4 meV, MAE_F=558.1 meV / A
+2024-07-15 14:44:47.015 INFO: Epoch 2: loss=4.5163644, RMSE_q = 0.2125174, MAE_E_per_atom=14706.2 meV, MAE_F=22.5 meV / A
+2024-07-15 14:45:19.401 INFO: Epoch 4: loss=14.1213421, RMSE_q = 0.3757837, MAE_E_per_atom=14708.0 meV, MAE_F=20.2 meV / A
+2024-07-15 14:45:48.256 INFO: Epoch 6: loss=2.7923570, RMSE_q = 0.1671035, MAE_E_per_atom=14710.0 meV, MAE_F=19.8 meV / A
+2024-07-16 09:53:30.072 INFO: MACE version: 0.3.5
+2024-07-16 09:53:30.124 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=5, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-16 09:53:30.124 INFO: Using CPU
+2024-07-16 09:53:30.188 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-16 09:53:30.188 INFO: Using random 5.0% of training set for validation
+2024-07-16 09:53:30.189 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-16 09:53:30.189 INFO: AtomicNumberTable: (1, 8)
+2024-07-16 09:53:30.190 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-16 09:53:30.190 INFO: Atomic energies: [-12.6746244439181, -2041.03979050724]
+2024-07-16 09:53:31.087 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-16 09:53:31.127 INFO: Average number of neighbors: 20.672
+2024-07-16 09:53:31.127 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-16 09:53:31.127 INFO: Building model
+2024-07-16 09:53:31.127 INFO: charged models: taking formal charges per config from data
+2024-07-16 09:53:31.127 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-16 09:53:31.385 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+2024-07-16 09:55:30.031 INFO: MACE version: 0.3.5
+2024-07-16 09:55:30.031 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=5, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-16 09:55:30.031 INFO: Using CPU
+2024-07-16 09:55:30.098 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-16 09:55:30.098 INFO: Using random 5.0% of training set for validation
+2024-07-16 09:55:30.099 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-16 09:55:30.099 INFO: AtomicNumberTable: (1, 8)
+2024-07-16 09:55:30.099 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-16 09:55:30.099 INFO: Atomic energies: [-12.6746244439181, -2041.03979050724]
+2024-07-16 09:55:30.197 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-16 09:55:30.221 INFO: Average number of neighbors: 20.672
+2024-07-16 09:55:30.221 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-16 09:55:30.221 INFO: Building model
+2024-07-16 09:55:30.221 INFO: charged models: taking formal charges per config from data
+2024-07-16 09:55:30.221 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-16 09:55:30.242 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+2024-07-16 10:02:14.296 INFO: MACE version: 0.3.5
+2024-07-16 10:02:14.297 INFO: Configuration: Namespace(config=None, name='QEqWwater', seed=123, log_dir='logs', model_dir='.', checkpoints_dir='checkpoints', results_dir='results', downloads_dir='downloads', device='cpu', default_dtype='float64', distributed=False, log_level='INFO', error_table='EFQRMSE', model='maceQEq', r_max=8.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps='64x0e+64x1o', num_channels=None, max_L=None, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='water100.xyz', valid_file=None, valid_fraction=0.05, test_file=None, test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='{1: -12.6746244439181, 8: -2041.03979050724}', keep_isolated_atoms=False, energy_key='energy', forces_key='forces', virials_key='virials', stress_key='stress', dipole_key='dipole', charges_key='aims_charges', loss='charges_energy_forces', forces_weight=100.0, swa_forces_weight=100.0, energy_weight=1.0, swa_energy_weight=1000.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', batch_size=10, valid_batch_size=5, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=False, start_swa=None, ema=False, ema_decay=0.99, max_num_epochs=50, patience=2048, foundation_model=None, foundation_model_readout=True, eval_interval=2, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'], charges_weight=100.0, scale_atsize=1.0, atomic_multipoles_key='density_coefficients', total_charge_key='total_charge', atomic_multipoles_weight=1.0, swa_atomic_multipoles_weight=1.0, external_field_key='external_field', fermi_level_key='fermi_level', dont_add_coulomb=False, include_local_electron_energy=False, atomic_multipoles_max_l=0, atomic_multipoles_smearing_width=1.0, kspace_cutoff_factor=1.5, atomic_formal_charges=None, formal_charges_from_data=True, field_feature_widths='[1.0]', dont_include_pbc_corrections=False, include_electrostatic_self_interaction=False, valid_set_seed=None, scf_training_options=None, field_dependence_type='local_linear', final_field_readout_type='StrictQuadraticFieldEnergyReadout', quadrupole_feature_corrections=False, use_pbc_evaluator=False)
+2024-07-16 10:02:14.297 INFO: Using CPU
+2024-07-16 10:02:14.360 INFO: Loaded 100 training configurations from 'water100.xyz'
+2024-07-16 10:02:14.360 INFO: Using random 5.0% of training set for validation
+2024-07-16 10:02:14.360 INFO: Total number of configurations: train=95, valid=5, tests=[]
+2024-07-16 10:02:14.360 INFO: AtomicNumberTable: (1, 8)
+2024-07-16 10:02:14.360 INFO: Atomic Energies not in training file, using command line argument E0s
+2024-07-16 10:02:14.361 INFO: Atomic energies: [-12.6746244439181, -2041.03979050724]
+2024-07-16 10:02:14.425 INFO: WeightedChargesEnergyForcesLoss()
+2024-07-16 10:02:14.446 INFO: Average number of neighbors: 20.672
+2024-07-16 10:02:14.446 INFO: Selected the following outputs: {'energy': True, 'forces': True, 'virials': False, 'stress': False}
+2024-07-16 10:02:14.446 INFO: Building model
+2024-07-16 10:02:14.446 INFO: charged models: taking formal charges per config from data
+2024-07-16 10:02:14.446 INFO: Hidden irreps: 64x0e+64x1o
+2024-07-16 10:02:14.465 WARNING: Standard deviation of the scaling is zero, Changing to no scaling
+dipole/charge corrections =  True
+2024-07-16 10:02:16.222 WARNING: No SWA checkpoint found, while SWA is enabled. Compare the swa_start parameter and the latest checkpoint.
+2024-07-16 10:02:16.223 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-6.pt
+2024-07-16 10:02:16.390 INFO: maceQEq(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(2x0e -> 64x0e | 128 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=8.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=8.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[-12.6746, -2041.0398])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e -> 64x0e | 4096 weights)
+      (conv_tp): TensorProduct(64x0e x 1x0e+1x1o+1x2e+1x3o -> 64x0e+64x1o+64x2e+64x3o | 256 paths | 256 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 256]
+      (linear): Linear(64x0e+64x1o+64x2e+64x3o -> 64x0e+64x1o+64x2e+64x3o | 16384 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e x 2x0e -> 64x0e+64x1o | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+      (conv_tp): TensorProduct(64x0e+64x1o x 1x0e+1x1o+1x2e+1x3o -> 128x0e+192x1o+192x2e+128x3o | 640 paths | 640 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 640]
+      (linear): Linear(128x0e+192x1o+192x2e+128x3o -> 64x0e+64x1o+64x2e+64x3o | 40960 weights)
+      (skip_tp): FullyConnectedTensorProduct(64x0e+64x1o x 2x0e -> 64x0e | 8192 paths | 8192 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x6x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e+64x1o -> 64x0e+64x1o | 8192 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float64 of size 2x4x64]
+                (1): Parameter containing: [torch.float64 of size 2x1x64]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(64x0e -> 64x0e | 4096 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=1.000000, shift=706.411645)
+  (readouts_eneg): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(64x0e -> 16x0e | 1024 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (eneg): LinearReadoutBlock(
+    (linear): Linear(64x0e+64x1o -> 1x0e | 64 weights)
+  )
+  (charge_equil): ChargeEquilibrationBlock(
+    (hardness_matrix): HardnessMatrix(
+      (hardness_matrix): A_real()
+    )
+    (hardness_matrix_PBC): HardnessMatrix_PBC(
+      (self_interaction): GTOSelfInteractionBlock()
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block_A): GTOChargeDensityFourierSeriesBlock_A()
+      (fourier_energy_block_A): KspaceEnergyProductBlock_A()
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+    )
+  )
+  (coulomb_energy): PBCAgnosticDirectElectrostaticEnergyBlock(
+    (realspace_energy): RealSpaceChargesOnlyElectrostaticEnergyBlock(
+      (self_interaction): GaussianSelfEnergyBlock()
+    )
+    (ewald_energy): KSpaceDirectElectrostaticEnergyBlock(
+      (density_gto_fs_block): GTOFourierSeriesCoeficientsBlock(
+        (radial_spline): RadialIntegralSpline(
+          (spline): NaturalCubicSplineBlock()
+        )
+        (spherical_harmonics): SphericalHarmonics()
+      )
+      (density_block): GTOChargeDensityFourierSeriesBlock()
+      (fourier_energy_block): KspaceEnergyProductBlock()
+      (self_interaction): GTOSelfInteractionBlock()
+      (monopole_dipole_correction): MonopoleDipoleCorrectionBlock()
+    )
+  )
+)
+2024-07-16 10:02:16.392 INFO: Number of parameters: 190050
+2024-07-16 10:02:16.393 INFO: Optimizer: Adam (
+Parameter Group 0
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: embedding
+    weight_decay: 0.0
+
+Parameter Group 1
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_decay
+    weight_decay: 5e-07
+
+Parameter Group 2
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: interactions_no_decay
+    weight_decay: 0.0
+
+Parameter Group 3
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: products
+    weight_decay: 5e-07
+
+Parameter Group 4
+    amsgrad: True
+    betas: (0.9, 0.999)
+    capturable: False
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.01
+    maximize: False
+    name: readouts
+    weight_decay: 0.0
+)
+2024-07-16 10:02:16.393 INFO: Using gradient clipping with tolerance=10.000
+2024-07-16 10:02:16.393 INFO: Started training
+2024-07-16 10:03:14.097 INFO: Epoch 6: loss=3.6918418, RMSE_q = 0.1921417, MAE_E_per_atom=14711.7 meV, MAE_F=24.5 meV / A
+2024-07-16 10:05:04.637 INFO: Epoch 8: loss=6.5124817, RMSE_q = 0.2551956, MAE_E_per_atom=14712.6 meV, MAE_F=16.1 meV / A
+2024-07-16 10:06:52.412 INFO: Epoch 10: loss=5.2350394, RMSE_q = 0.2288021, MAE_E_per_atom=14715.2 meV, MAE_F=35.9 meV / A
+2024-07-16 10:08:39.361 INFO: Epoch 12: loss=4.9659656, RMSE_q = 0.2228445, MAE_E_per_atom=14715.1 meV, MAE_F=16.7 meV / A
+2024-07-16 10:10:24.432 INFO: Epoch 14: loss=3.4770178, RMSE_q = 0.1864676, MAE_E_per_atom=14716.5 meV, MAE_F=28.7 meV / A
+2024-07-16 10:12:05.377 INFO: Epoch 16: loss=5.1864343, RMSE_q = 0.2277374, MAE_E_per_atom=14717.4 meV, MAE_F=23.4 meV / A
+2024-07-16 10:13:51.017 INFO: Epoch 18: loss=2.9263393, RMSE_q = 0.1710655, MAE_E_per_atom=14717.1 meV, MAE_F=26.1 meV / A
+2024-07-16 10:15:34.940 INFO: Epoch 20: loss=5.9760000, RMSE_q = 0.2444586, MAE_E_per_atom=14717.4 meV, MAE_F=24.9 meV / A
+2024-07-16 10:17:22.205 INFO: Epoch 22: loss=3.8456581, RMSE_q = 0.1961035, MAE_E_per_atom=14718.8 meV, MAE_F=25.9 meV / A
+2024-07-16 10:19:06.919 INFO: Epoch 24: loss=6.7564941, RMSE_q = 0.2599326, MAE_E_per_atom=14718.7 meV, MAE_F=31.4 meV / A
+2024-07-16 10:20:50.425 INFO: Epoch 26: loss=2.9538197, RMSE_q = 0.1718668, MAE_E_per_atom=14720.1 meV, MAE_F=23.4 meV / A
+2024-07-16 10:22:35.912 INFO: Epoch 28: loss=13.4401364, RMSE_q = 0.3666079, MAE_E_per_atom=14722.8 meV, MAE_F=56.2 meV / A
+2024-07-16 10:24:20.519 INFO: Epoch 30: loss=6.1538487, RMSE_q = 0.2480695, MAE_E_per_atom=14721.9 meV, MAE_F=33.9 meV / A
+2024-07-16 10:26:02.129 INFO: Epoch 32: loss=4.2959555, RMSE_q = 0.2072669, MAE_E_per_atom=14721.8 meV, MAE_F=31.1 meV / A
+2024-07-16 10:27:43.977 INFO: Epoch 34: loss=5.4371704, RMSE_q = 0.2331774, MAE_E_per_atom=14723.3 meV, MAE_F=33.0 meV / A
+2024-07-16 10:29:28.735 INFO: Epoch 36: loss=2.5972725, RMSE_q = 0.1611606, MAE_E_per_atom=14721.8 meV, MAE_F=27.7 meV / A
+2024-07-16 10:31:10.668 INFO: Epoch 38: loss=3.7992465, RMSE_q = 0.1949166, MAE_E_per_atom=14722.5 meV, MAE_F=34.8 meV / A
+2024-07-16 10:32:59.229 INFO: Epoch 40: loss=2.6948109, RMSE_q = 0.1641588, MAE_E_per_atom=14724.0 meV, MAE_F=28.8 meV / A
+2024-07-16 10:34:46.130 INFO: Epoch 42: loss=6.9370888, RMSE_q = 0.2633835, MAE_E_per_atom=14723.2 meV, MAE_F=41.9 meV / A
+2024-07-16 10:36:33.527 INFO: Epoch 44: loss=4.9910888, RMSE_q = 0.2234074, MAE_E_per_atom=14723.9 meV, MAE_F=32.2 meV / A
+2024-07-16 10:38:17.925 INFO: Epoch 46: loss=4.0545042, RMSE_q = 0.2013580, MAE_E_per_atom=14724.3 meV, MAE_F=40.7 meV / A
+2024-07-16 10:40:01.837 INFO: Epoch 48: loss=5.7507125, RMSE_q = 0.2398064, MAE_E_per_atom=14725.1 meV, MAE_F=38.2 meV / A
+2024-07-16 10:40:50.972 INFO: Training complete
+2024-07-16 10:40:50.977 INFO: Computing metrics for training, validation, and test sets
+2024-07-16 10:40:50.978 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-36.pt
+2024-07-16 10:40:51.002 INFO: Loaded model from epoch 36
+2024-07-16 10:40:51.063 INFO: Evaluating train ...
+2024-07-16 10:41:09.344 INFO: Evaluating valid ...
+2024-07-16 10:41:11.175 INFO: 
++-------------+---------------------+------------------+-------------------+--------+
+| config_type | RMSE E / meV / atom | RMSE F / meV / A | relative F RMSE % | RMSE q |
++-------------+---------------------+------------------+-------------------+--------+
++-------------+---------------------+------------------+-------------------+--------+
+2024-07-16 10:41:11.175 INFO: Saving model to checkpoints/QEqWwater_run-123.model

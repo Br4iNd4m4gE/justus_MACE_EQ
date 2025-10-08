@@ -1,0 +1,30 @@
+2024-07-16 16:12:59,214 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Current SDK version is 0.17.4
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Configure stats pid to 1681677
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Loading settings from /home/ka/ka_ipc/ka_he8978/.config/wandb/settings
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Loading settings from /lustre/home/ka/ka_ipc/ka_he8978/MACE_QEq_development/water_will/wandb/settings
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'api_key': '***REDACTED***'}
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-07-16 16:12:59,215 WARNING MainThread:1681677 [wandb_setup.py:_flush():76] Could not save program above cwd: /lustre/home/ka/ka_ipc/ka_he8978/MACE_QEq_development/mace-tools/scripts/martin_train.py
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': None, 'program_abspath': '/lustre/home/ka/ka_ipc/ka_he8978/MACE_QEq_development/mace-tools/scripts/martin_train.py', 'program': '/lustre/home/ka/ka_ipc/ka_he8978/MACE_QEq_development/mace-tools/scripts/martin_train.py'}
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_init.py:_log_setup():529] Logging user logs to /lustre/home/ka/ka_ipc/ka_he8978/MACE_QEq_development/water_will/wandb/run-20240716_161259-nsk1umes/logs/debug.log
+2024-07-16 16:12:59,215 INFO    MainThread:1681677 [wandb_init.py:_log_setup():530] Logging internal logs to /lustre/home/ka/ka_ipc/ka_he8978/MACE_QEq_development/water_will/wandb/run-20240716_161259-nsk1umes/logs/debug-internal.log
+2024-07-16 16:12:59,216 INFO    MainThread:1681677 [wandb_init.py:init():569] calling init triggers
+2024-07-16 16:12:59,216 INFO    MainThread:1681677 [wandb_init.py:init():576] wandb.init called with sweep_config: {}
+config: {'num_channels': None, 'max_L': None, 'correlation': 3, 'lr': 0.01, 'swa_lr': 0.001, 'weight_decay': 5e-07, 'batch_size': 10, 'max_num_epochs': 50, 'start_swa': None, 'energy_weight': 1.0, 'forces_weight': 100.0}
+2024-07-16 16:12:59,216 INFO    MainThread:1681677 [wandb_init.py:init():619] starting backend
+2024-07-16 16:12:59,216 INFO    MainThread:1681677 [wandb_init.py:init():623] setting up manager
+2024-07-16 16:12:59,219 INFO    MainThread:1681677 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-07-16 16:12:59,221 INFO    MainThread:1681677 [wandb_init.py:init():631] backend started and connected
+2024-07-16 16:12:59,227 INFO    MainThread:1681677 [wandb_init.py:init():720] updated telemetry
+2024-07-16 16:12:59,228 INFO    MainThread:1681677 [wandb_init.py:init():753] communicating run to backend with 90.0 second timeout
+2024-07-16 16:12:59,535 ERROR   MainThread:1681677 [wandb_init.py:init():779] encountered error: you may not log runs directly to your organization, please try using your team entity (Error 400: Bad Request)
+2024-07-16 16:12:59,535 ERROR   MainThread:1681677 [wandb_init.py:init():1191] error in wandb.init()
+Traceback (most recent call last):
+  File "/lustre/home/ka/ka_ipc/ka_he8978/miniconda3/envs/mace_env/lib/python3.12/site-packages/wandb/sdk/wandb_init.py", line 1181, in init
+    return wi.init()
+           ^^^^^^^^^
+  File "/lustre/home/ka/ka_ipc/ka_he8978/miniconda3/envs/mace_env/lib/python3.12/site-packages/wandb/sdk/wandb_init.py", line 785, in init
+    raise error
+wandb.errors.CommError: you may not log runs directly to your organization, please try using your team entity (Error 400: Bad Request)
+2024-07-16 16:13:00,614 WARNING MsgRouterThr:1681677 [router.py:message_loop():77] message_loop has been closed

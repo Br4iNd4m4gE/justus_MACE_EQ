@@ -1,0 +1,38 @@
+2024-07-16 16:16:36.773 INFO: Using gradient clipping with tolerance=10.000
+2024-07-16 16:16:36.773 INFO: Started training
+2024-07-16 16:16:56.982 INFO: Epoch 4: loss=4.2055732, RMSE_q = 0.2050749, MAE_E_per_atom=14727.4 meV, MAE_F=15.1 meV / A
+2024-07-16 16:17:07.090 INFO: Epoch 6: loss=7.5737659, RMSE_q = 0.2752048, MAE_E_per_atom=14728.2 meV, MAE_F=18.8 meV / A
+2024-07-16 16:17:15.566 INFO: Epoch 8: loss=2.9025209, RMSE_q = 0.1703679, MAE_E_per_atom=14728.4 meV, MAE_F=13.4 meV / A
+2024-07-16 16:17:24.060 INFO: Epoch 10: loss=4.6301529, RMSE_q = 0.2151779, MAE_E_per_atom=14728.9 meV, MAE_F=15.4 meV / A
+2024-07-16 16:17:32.436 INFO: Epoch 12: loss=2.7356617, RMSE_q = 0.1653984, MAE_E_per_atom=14728.8 meV, MAE_F=15.5 meV / A
+2024-07-16 16:17:41.108 INFO: Epoch 14: loss=3.3381380, RMSE_q = 0.1827057, MAE_E_per_atom=14730.2 meV, MAE_F=16.1 meV / A
+2024-07-16 16:17:49.923 INFO: Epoch 16: loss=2.3666160, RMSE_q = 0.1538381, MAE_E_per_atom=14727.2 meV, MAE_F=10.8 meV / A
+2024-07-16 16:17:58.641 INFO: Epoch 18: loss=4.7743248, RMSE_q = 0.2185023, MAE_E_per_atom=14728.0 meV, MAE_F=18.7 meV / A
+2024-07-16 16:18:07.579 INFO: Epoch 20: loss=3.5070988, RMSE_q = 0.1872725, MAE_E_per_atom=14728.5 meV, MAE_F=21.6 meV / A
+2024-07-16 16:18:16.304 INFO: Epoch 22: loss=7.3744398, RMSE_q = 0.2715592, MAE_E_per_atom=14729.1 meV, MAE_F=30.5 meV / A
+2024-07-16 16:18:24.976 INFO: Epoch 24: loss=2.6325876, RMSE_q = 0.1622525, MAE_E_per_atom=14729.3 meV, MAE_F=22.0 meV / A
+2024-07-16 16:18:33.768 INFO: Epoch 26: loss=8.1992325, RMSE_q = 0.2863430, MAE_E_per_atom=14730.7 meV, MAE_F=23.6 meV / A
+2024-07-16 16:18:42.622 INFO: Epoch 28: loss=4.1263083, RMSE_q = 0.2031332, MAE_E_per_atom=14729.9 meV, MAE_F=46.1 meV / A
+2024-07-16 16:18:51.275 INFO: Epoch 30: loss=2.1902536, RMSE_q = 0.1479951, MAE_E_per_atom=14729.9 meV, MAE_F=23.8 meV / A
+2024-07-16 16:19:00.157 INFO: Epoch 32: loss=4.3279000, RMSE_q = 0.2080361, MAE_E_per_atom=14730.1 meV, MAE_F=48.2 meV / A
+2024-07-16 16:19:09.040 INFO: Epoch 34: loss=3.7891780, RMSE_q = 0.1946581, MAE_E_per_atom=14731.1 meV, MAE_F=19.6 meV / A
+2024-07-16 16:19:17.825 INFO: Epoch 36: loss=7.2680848, RMSE_q = 0.2695939, MAE_E_per_atom=14732.3 meV, MAE_F=43.1 meV / A
+2024-07-16 16:19:26.591 INFO: Epoch 38: loss=2.8292243, RMSE_q = 0.1682030, MAE_E_per_atom=14732.0 meV, MAE_F=26.1 meV / A
+2024-07-16 16:19:35.332 INFO: Epoch 40: loss=58.8905539, RMSE_q = 0.7674018, MAE_E_per_atom=14738.0 meV, MAE_F=108.1 meV / A
+2024-07-16 16:19:44.184 INFO: Epoch 42: loss=6.3941128, RMSE_q = 0.2528658, MAE_E_per_atom=14733.0 meV, MAE_F=43.7 meV / A
+2024-07-16 16:19:52.863 INFO: Epoch 44: loss=15.7617141, RMSE_q = 0.3970103, MAE_E_per_atom=14734.0 meV, MAE_F=52.4 meV / A
+2024-07-16 16:20:01.619 INFO: Epoch 46: loss=15.6492167, RMSE_q = 0.3955909, MAE_E_per_atom=14734.1 meV, MAE_F=49.2 meV / A
+2024-07-16 16:20:10.474 INFO: Epoch 48: loss=13.8322187, RMSE_q = 0.3719169, MAE_E_per_atom=14735.5 meV, MAE_F=47.0 meV / A
+2024-07-16 16:20:14.873 INFO: Training complete
+2024-07-16 16:20:14.875 INFO: Computing metrics for training, validation, and test sets
+2024-07-16 16:20:14.877 INFO: Loading checkpoint: checkpoints/QEqWwater_run-123_epoch-30.pt
+2024-07-16 16:20:14.923 INFO: Loaded model from epoch 30
+2024-07-16 16:20:14.993 INFO: Evaluating train ...
+2024-07-16 16:20:17.678 INFO: Evaluating valid ...
+2024-07-16 16:20:17.907 INFO:
++-------------+---------------------+------------------+-------------------+--------+
+| config_type | RMSE E / meV / atom | RMSE F / meV / A | relative F RMSE % | RMSE q |
++-------------+---------------------+------------------+-------------------+--------+
++-------------+---------------------+------------------+-------------------+--------+
+2024-07-16 16:20:17.907 INFO: Saving model to checkpoints/QEqWwater_run-123.model
+2024-07-16 16:20:18.084 INFO: Done

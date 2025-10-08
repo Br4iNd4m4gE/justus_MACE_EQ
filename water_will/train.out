@@ -1,0 +1,12 @@
+
+======================== JOB EFFICIENCY REPORT ========================
+Job ID: 13049382
+Cluster: justus2
+User/Group: ka_he8978/ka_ipc
+State: COMPLETED (exit code 0)
+Cores: 1
+CPU Utilized: 00:00:12
+CPU Efficiency: 5.45% of 00:03:40 core-walltime
+Job Wall-clock time: 00:03:40
+Memory Utilized: 978.75 MB
+Memory Efficiency: 2.99% of 32.00 GB
